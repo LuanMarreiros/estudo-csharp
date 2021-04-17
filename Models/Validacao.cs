@@ -1,13 +1,14 @@
 ﻿namespace Primeira_api.Models
 {
-    public class Autentificacao
+    public class Validacao
     {
-        public static bool ValidarToken(string token)
+        public static bool ValidarEmail(Usuario usuario)
         {
-            if (token == "Bearer teste")
+            if (usuario.email.Contains("@"))
             {
                 return true;
             }
+
             return false;
         }
     }
