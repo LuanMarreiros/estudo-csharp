@@ -12,12 +12,15 @@ namespace Primeira_api.Models
         public void SetResponse(string message)
         {
             this._message = message;
+            this._campo = "";
+            this._errorType = "";
         }
 
         public void SetResponse(string message, string campo)
         {
             this._message = message;
             this._campo = campo;
+            this._errorType = "";
         }
 
         public void SetResponse(string message, string campo, string errorType)
@@ -29,7 +32,11 @@ namespace Primeira_api.Models
 
         public List<object> GetResponse()
         {
-            if (_errorType.Length != 0)
+            if (_errorType.Length == 0 && _campo.Length == 0)
+            {
+                this._responseList.Add(new { message = this._message });
+            }
+            else if (_errorType.Length == 0)
             {
                 this._responseList.Add(new { message = this._message, campo = this._campo });
             }
