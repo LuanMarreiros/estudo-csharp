@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace Primeira_api.Models
+﻿namespace Primeira_api.Models
 {
     public class Login
     {
@@ -12,9 +7,10 @@ namespace Primeira_api.Models
         public string email { get; set; }
 
         public Login() { }
-        public Login(Login login) {
+        public Login(Login login)
+        {
             this.nomeCompleto = login.nomeCompleto;
-            this.email= login.email;
+            this.email = login.email;
         }
 
         public Login(Usuario usuario)

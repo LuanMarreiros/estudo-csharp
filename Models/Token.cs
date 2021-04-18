@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using Primeira_api.DTO;
+﻿using Primeira_api.DTO;
+using System;
 
 namespace Primeira_api.Models
 {
@@ -13,7 +10,7 @@ namespace Primeira_api.Models
 
         public Token()
         {
-         
+
         }
 
         public Token(Login login)
@@ -40,11 +37,11 @@ namespace Primeira_api.Models
             }
         }
 
-        public static bool ValidarToken(Login login) {
-
+        public static bool ValidarToken(Login login)
+        {
             var result = SQLConection.Select(String.Format("select * from Usuario where email = '{0}' and nomeCompleto = '{1}'", login.email, login.nomeCompleto));
 
-            if(result.Count != 0)
+            if (result.Count != 0)
             {
                 return true;
             }

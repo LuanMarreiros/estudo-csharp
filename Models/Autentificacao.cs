@@ -1,14 +1,13 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
-using Primeira_api.DTO;
 
 namespace Primeira_api.Models
 {
     public class Autentificacao
     {
         private List<Token> _tokenLoginList = new List<Token>();
-        private List<object> _token = new List<object>();
+        private List<object> _tokenObj = new List<object>();
         private static string _token64 = "";
         private static byte[] _bytes;
 
@@ -16,19 +15,24 @@ namespace Primeira_api.Models
         {
             Token tokenDeserialized;
 
-            _bytes = Convert.FromBase64String(token.Replace("Bearer ", ""));
-
-            tokenDeserialized = JsonConvert.DeserializeObject<Token>(System.Text.Encoding.UTF8.GetString(_bytes));
-
-            if (tokenDeserialized.verificado)
+            if (token.Contains("Bearer "))
             {
-                return true;
+                _bytes = Convert.FromBase64String(token.Replace("Bearer ", ""));
+
+                tokenDeserialized = JsonConvert.DeserializeObject<Token>(System.Text.Encoding.UTF8.GetString(_bytes));
+
+                if (tokenDeserialized.verificado)
+                {
+                    return true;
+                }
+                return false;
             }
 
             return false;
         }
 
-        public List<object> GetToken(Login login) {
+        public List<object> GetToken(Login login)
+        {
 
             if (Token.ValidarToken(login))
             {
@@ -38,9 +42,9 @@ namespace Primeira_api.Models
 
                 _token64 = Convert.ToBase64String(_bytes);
 
-                this._token.Add(new { token = _token64 });
+                this._tokenObj.Add(new { token = _token64 });
 
-                return this._token;
+                return this._tokenObj;
             }
             else
             {
@@ -50,9 +54,9 @@ namespace Primeira_api.Models
 
                 _token64 = Convert.ToBase64String(_bytes);
 
-                this._token.Add(new { token = _token64 });
+                this._tokenObj.Add(new { token = _token64 });
 
-                return this._token;
+                return this._tokenObj;
             }
         }
     }

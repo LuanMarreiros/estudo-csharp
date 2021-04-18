@@ -65,7 +65,7 @@ namespace Primeira_api.Models
         {
             List<Usuario> result = SQLConection.Select(String.Format("select * from Usuario where email = '{0}'", email));
 
-            if(result.Count != 0)
+            if (result.Count != 0)
             {
                 return true;
             }
