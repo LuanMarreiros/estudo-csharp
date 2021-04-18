@@ -61,6 +61,18 @@ namespace Primeira_api.Models
             return result;
         }
 
+        public static bool SelectUsuarioByEmail(string email)
+        {
+            List<Usuario> result = SQLConection.Select(String.Format("select * from Usuario where email = '{0}'", email));
+
+            if(result.Count != 0)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         public static object PostUsuario(Usuario usuario)
         {
             _response = new Response();

@@ -141,13 +141,16 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AutentificacaoController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="DTO\SQLConection.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Autentificacao.cs" />
+    <Compile Include="Models\Login.cs" />
     <Compile Include="Models\Response.cs" />
+    <Compile Include="Models\Token.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Models\Validacao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

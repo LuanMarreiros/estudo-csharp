@@ -11,5 +11,15 @@
 
             return false;
         }
+
+        public static bool ValidarEmail(Login login)
+        {
+            if (login.email.Contains("@"))
+            {
+                return true;
+            }
+
+            return false;
+        }
     }
 }
