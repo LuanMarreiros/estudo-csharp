@@ -29,8 +29,7 @@ namespace Primeira_api.Models
                 }
                 catch
                 {
-
-                    throw new NotImplementedException("vish");
+                    throw new AutentificationException("Usuário não autorizado.");
                 }
 
                 if (tokenDeserialized.verificado)

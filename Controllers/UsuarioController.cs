@@ -2,6 +2,7 @@
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
+using Primeira_api.Exceptions;
 
 namespace Primeira_api.Controllers
 {
@@ -18,9 +19,7 @@ namespace Primeira_api.Controllers
                 return Content(HttpStatusCode.OK, Usuario.SelectUsuario());
             }
 
-            _response.SetResponse("Falha na autentificação.", "Authorization", "Usuário não autorizado.");
-
-            return Content(HttpStatusCode.Unauthorized, _response.GetResponse());
+            throw new AutentificationException("Usuário não autorizado.");
         }
 
         public async Task<IHttpActionResult> Get(string filter)
@@ -32,9 +31,7 @@ namespace Primeira_api.Controllers
                 return Content(HttpStatusCode.OK, Usuario.SelectUsuario(filter));
             }
 
-            _response.SetResponse("Falha na autentificação.", "Authorization", "Usuário não autorizado.");
-
-            return Content(HttpStatusCode.Unauthorized, _response.GetResponse());
+            throw new AutentificationException("Usuário não autorizado.");
         }
 
         public async Task<IHttpActionResult> Get(string filter, string orderBy)
@@ -46,9 +43,7 @@ namespace Primeira_api.Controllers
                 return Content(HttpStatusCode.OK, Usuario.SelectUsuario(filter, orderBy));
             }
 
-            _response.SetResponse("Falha na autentificação.", "Authorization", "Usuário não autorizado.");
-
-            return Content(HttpStatusCode.Unauthorized, _response.GetResponse());
+            throw new AutentificationException("Usuário não autorizado.");
         }
 
         public async Task<IHttpActionResult> Post([FromBody] Usuario usuario)
@@ -62,14 +57,10 @@ namespace Primeira_api.Controllers
                     return Ok(Usuario.PostUsuario(usuario));
                 }
 
-                _response.SetResponse("O email inserido está incorreto.", "email", "Solicitação inválida.");
-
-                return Content(HttpStatusCode.BadRequest, _response.GetResponse());
+                throw new EmailException("O email inserido está incorreto.");
             }
 
-            _response.SetResponse("Falha na autentificação.", "Authorization", "Usuário não autorizado.");
-
-            return Content(HttpStatusCode.Unauthorized, _response.GetResponse());
+            throw new AutentificationException("Usuário não autorizado.");
         }
 
         public void Put([FromBody] Usuario usuario)

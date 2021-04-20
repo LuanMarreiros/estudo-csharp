@@ -2,6 +2,7 @@
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
+using Primeira_api.Exceptions;
 
 namespace Primeira_api.Controllers
 {
@@ -11,22 +12,14 @@ namespace Primeira_api.Controllers
 
         public async Task<IHttpActionResult> Post([FromBody] Login login)
         {
-            if (Autentificacao.ValidarToken(Request.Headers.Authorization.ToString())){
-                if (Validacao.ValidarEmail(login))
-                {
-                    Autentificacao auth = new Autentificacao();
+            if (Validacao.ValidarEmail(login))
+            {
+                Autentificacao auth = new Autentificacao();
 
-                    return Content(HttpStatusCode.OK, auth.GetToken(login));
-                }
-
-                _response.SetResponse("O email inserido está incorreto.", "email", "Solicitação inválida.");
-
-                return Content(HttpStatusCode.Unauthorized, _response.GetResponse());
+                return Content(HttpStatusCode.OK, auth.GetToken(login));
             }
 
-            _response.SetResponse("Falha na autentificação.", "Authorization", "Usuário não autorizado.");
-
-            return Content(HttpStatusCode.Unauthorized, _response.GetResponse());
+            throw new EmailException("O email inserido está incorreto.");
         }
 
     }
