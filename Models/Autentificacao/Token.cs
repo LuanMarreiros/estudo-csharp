@@ -37,7 +37,7 @@ namespace Primeira_api.Models
             }
         }
 
-        public static bool ValidarToken(Login login)
+        public static bool ValidarLogin(Login login)
         {
             var result = SQLConection.Select(String.Format("select * from Usuario where email = '{0}' and nomeCompleto = '{1}'", login.email, login.nomeCompleto));
 

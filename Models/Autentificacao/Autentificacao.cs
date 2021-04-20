@@ -1,6 +1,10 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using Primeira_api.Exceptions;
+using System.Web.Http;
+using System.Net;
+using System.Net.Http;
 
 namespace Primeira_api.Models
 {
@@ -17,9 +21,17 @@ namespace Primeira_api.Models
 
             if (token.Contains("Bearer "))
             {
-                _bytes = Convert.FromBase64String(token.Replace("Bearer ", ""));
+                try
+                {
+                    _bytes = Convert.FromBase64String(token.Replace("Bearer ", ""));
 
-                tokenDeserialized = JsonConvert.DeserializeObject<Token>(System.Text.Encoding.UTF8.GetString(_bytes));
+                    tokenDeserialized = JsonConvert.DeserializeObject<Token>(System.Text.Encoding.UTF8.GetString(_bytes));
+                }
+                catch
+                {
+
+                    throw new NotImplementedException("vish");
+                }
 
                 if (tokenDeserialized.verificado)
                 {
@@ -34,7 +46,7 @@ namespace Primeira_api.Models
         public List<object> GetToken(Login login)
         {
 
-            if (Token.ValidarToken(login))
+            if (Token.ValidarLogin(login))
             {
                 this._tokenLoginList.Add(new Token(login, true));
 
@@ -48,15 +60,15 @@ namespace Primeira_api.Models
             }
             else
             {
-                this._tokenLoginList.Add(new Token(login, false));
+                 this._tokenLoginList.Add(new Token(login, false));
 
-                _bytes = System.Text.ASCIIEncoding.ASCII.GetBytes(JsonConvert.SerializeObject(this._tokenLoginList[0]));
+                 _bytes = System.Text.ASCIIEncoding.ASCII.GetBytes(JsonConvert.SerializeObject(this._tokenLoginList[0]));
 
-                _token64 = Convert.ToBase64String(_bytes);
+                 _token64 = Convert.ToBase64String(_bytes);
 
-                this._tokenObj.Add(new { token = _token64 });
+                 this._tokenObj.Add(new { token = _token64 });
 
-                return this._tokenObj;
+                 return this._tokenObj;
             }
         }
     }

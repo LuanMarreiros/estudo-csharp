@@ -144,15 +144,16 @@
     <Compile Include="Controllers\AutentificacaoController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="DTO\SQLConection.cs" />
+    <Compile Include="Exceptions\RequestException.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Autentificacao.cs" />
-    <Compile Include="Models\Login.cs" />
-    <Compile Include="Models\Response.cs" />
-    <Compile Include="Models\Token.cs" />
-    <Compile Include="Models\Usuario.cs" />
-    <Compile Include="Models\Validacao.cs" />
+    <Compile Include="Models\Autentificacao\Autentificacao.cs" />
+    <Compile Include="Models\Login\Login.cs" />
+    <Compile Include="Models\Response\Response.cs" />
+    <Compile Include="Models\Autentificacao\Token.cs" />
+    <Compile Include="Models\Usuario\Usuario.cs" />
+    <Compile Include="Models\Validacao\Validacao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -11,14 +11,20 @@ namespace Primeira_api.Controllers
 
         public async Task<IHttpActionResult> Post([FromBody] Login login)
         {
-            if (Validacao.ValidarEmail(login))
-            {
-                Autentificacao auth = new Autentificacao();
+            if (Autentificacao.ValidarToken(Request.Headers.Authorization.ToString())){
+                if (Validacao.ValidarEmail(login))
+                {
+                    Autentificacao auth = new Autentificacao();
 
-                return Content(HttpStatusCode.OK, auth.GetToken(login));
+                    return Content(HttpStatusCode.OK, auth.GetToken(login));
+                }
+
+                _response.SetResponse("O email inserido está incorreto.", "email", "Solicitação inválida.");
+
+                return Content(HttpStatusCode.Unauthorized, _response.GetResponse());
             }
 
-            _response.SetResponse("O email inserido está incorreto.", "email", "Solicitação inválida.");
+            _response.SetResponse("Falha na autentificação.", "Authorization", "Usuário não autorizado.");
 
             return Content(HttpStatusCode.Unauthorized, _response.GetResponse());
         }

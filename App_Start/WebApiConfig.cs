@@ -8,6 +8,8 @@ namespace Primeira_api
         {
             // Serviços e configuração da API da Web
 
+            config.Filters.Add(new Primeira_api.Exceptions.RequestException());
+
             // Rotas da API da Web
             config.MapHttpAttributeRoutes();
 
