@@ -145,7 +145,7 @@
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="DTO\SQLConection.cs" />
     <Compile Include="Exceptions\AutentificationException.cs" />
-    <Compile Include="Exceptions\Email.cs" />
+    <Compile Include="Exceptions\EmailException.cs" />
     <Compile Include="Exceptions\RequestException.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

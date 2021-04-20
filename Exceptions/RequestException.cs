@@ -16,9 +16,13 @@ namespace Primeira_api.Exceptions
         {
             Type type = exception.GetType();
 
-            if (type.Name == "AutentificationException")
+            switch (type.Name)
             {
-                return HttpStatusCode.Unauthorized;
+                case "AutentificationException":
+                    return HttpStatusCode.Unauthorized;
+
+                case "EmailException":
+                    return HttpStatusCode.Forbidden;
             }
 
             return HttpStatusCode.BadRequest;
